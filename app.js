@@ -1,14 +1,21 @@
-const express = require("express");
+const express = require( 'express' );
+const os = require( 'os' );
 
 let app = express();
 let subApp = express();
 
-app.get('/nlb', (req, res) => {
-    
-    return res.send('Ok.');
-});
+subApp.get( '/', ( req, res ) => {
 
-let path = process.env.REQUEST_PATH || '';
-app.use(path, subApp);
+    let r = '<html><body><center><br><br><br><h1>Servidor: '
+    + os.hostname() + '</h1><h1>' + new Date().toISOString().slice( 0, 19 )
+    + '</h1></center></body></html>';
 
-app.listen(4242);
+    return res.send( r );
+} );
+
+let path = process.env.REQUEST_PATH || '/nlb';
+app.use( path, subApp );
+
+console.log( 'Listening on ' + 4242 );
+
+app.listen( 4242 );
