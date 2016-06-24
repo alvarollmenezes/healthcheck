@@ -16,6 +16,11 @@ subApp.get( '/', ( req, res ) => {
     return res.send( r );
 } );
 
+subApp.get( '/teste', ( req, res ) => {
+
+    return res.send( JSON.stringify( req.headers ) );
+} );
+
 let path = process.env.REQUEST_PATH || '/nlb';
 app.use( path, subApp );
 
