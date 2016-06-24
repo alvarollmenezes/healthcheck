@@ -10,7 +10,7 @@ subApp.get( '/', ( req, res ) => {
     + os.hostname() + '</h1><h1>'
     + new Date().toISOString().slice( 0, 19 )
     + '</h1><h1>'
-    + ( req.headers( 'HTTP_X_FORWARDED_FOR' ) || req.connection.remoteAddress )
+    + ( req.get( 'HTTP_X_FORWARDED_FOR' ) || req.connection.remoteAddress )
     + '</center></body></html>';
 
     return res.send( r );
