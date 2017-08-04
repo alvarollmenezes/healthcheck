@@ -1,10 +1,11 @@
 const express = require( 'express' );
 const os = require( 'os' );
 
-let app = express();
-let subApp = express();
+const PORT = process.env.PORT || 4242;
 
-subApp.get( '/', ( req, res ) => {
+const app = express();
+
+app.use( ( req, res ) => {
 
     let r = '<html><body><center><br><br><br><h1>Servidor: '
     + os.hostname() + '</h1><h1>'
@@ -16,9 +17,6 @@ subApp.get( '/', ( req, res ) => {
     return res.send( r );
 } );
 
-let path = process.env.REQUEST_PATH || '/nlb';
-app.use( path, subApp );
+app.listen( PORT );
 
-console.log( 'Listening on ' + 4242 );
-
-app.listen( 4242 );
+console.log( 'Listening on ' + PORT );
